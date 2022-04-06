@@ -4,56 +4,81 @@
  * Curso: Algoritmos y estructuras de datos
     @version: 
         - Creación: 04/04/2022
-        - Ultima modificación: 05/02/2022
+        - Ultima modificación: 06/02/2022
     Clase vista que implementa el Binary Search Tree
-    Se usó como referencia el siguiente enlace: 
+    Se usó como referencia el siguiente enlace: https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/ 
 */
 
 import java.util.ArrayList;
 
 public class BST{
 
+    //class that founds the left and right child of the key value
     class Node{
         ArrayList<String> key;
         Node left, right;
         
         public Node(ArrayList<String> item){ 
-            key = item; left = right = null;
+            key = item; 
+            left = right = null;
         }
     }
 
+    //root of BST
     Node root;
 
+    //constructor
     BST(){
         root = null;
     }
 
-    Node AgregarR(Node root, ArrayList<String> key){
-        if (root == null) // En caso lo encuentre vacio, crea un nuevo nodo
-        { root = new Node(key) ;return root; }
+    /**
+     * Recursive method to insert a new key
+     * @param root
+     * @param key
+     * @return
+     */
+    Node add(Node root, ArrayList<String> key){
+        //if node is empty returns a new node
+        if (root == null){
+            root = new Node(key);
+            return root; 
+        }
  
-        if (key.get(0).compareTo(root.key.get(0))<0) // En caso si exista, realiza procesos
-            root.left = AgregarR(root.left, key);
+        //if node exists recurs the tree
+        if (key.get(0).compareTo(root.key.get(0))<0)
+            root.left = add(root.left, key);
         else if (key.get(0).compareTo(root.key.get(0))>0)
-            root.right = AgregarR(root.right, key);
+            root.right = add(root.right, key);
  
-        /* Devuelve el pointer del nodo */
+        //returns the pointer
         return root;
     }
 
-    void insertar(ArrayList<String> key){ 
-        root = AgregarR( root, key ); 
+    /**
+     * 
+     * @param key
+     */
+    void insert(ArrayList<String> key){ 
+        root = add( root, key ); 
     }
 
-    void MostrarBSTOrdenado( Node root ){
+    /**
+     * function to order the BST
+     * @param root
+     */
+    void inOrderBST( Node root ){
         if ( root != null ){
-            MostrarBSTOrdenado(root.left);
+            inOrderBST(root.left);
             System.out.println(root.key);
-            MostrarBSTOrdenado(root.right);
+            inOrderBST(root.right);
         }
     }
 
-    void Ordenado(){ 
-        MostrarBSTOrdenado(root); 
+    /**
+     * function that calls the function
+     */
+    void inOrder(){ 
+        inOrderBST(root); 
     }
 }
