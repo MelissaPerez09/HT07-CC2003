@@ -1,0 +1,9 @@
+house,casa,loger
+dog,perro,chien
+homework,tarea,devoirs
+woman,mujer,femme
+town,pueblo,ville
+yes,si,oui
+no,no,non
+thanks,gracias,merci
+sir,senor,mosieur
