@@ -7,3 +7,6 @@ yes,si,oui
 no,no,non
 thanks,gracias,merci
 sir,senor,mosieur
+hello,bonjour,hola
+thank you,gracias,merci
+girl,niña,fille

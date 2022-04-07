@@ -65,13 +65,17 @@ public class Vista{
             //prints the options 
             System.out.println("\nWhat do you want to do?");
             System.out.println("(1) Use translator");
-            System.out.println("(2) Exit");
+            System.out.println("(2) See the dictionary");
+            System.out.println("(3) Add a word to the dictionary");
+            System.out.println("(4) Delete a word from the dictionary");
+            System.out.println("(5) Modify a word from the dictionary");
+            System.out.println("(6) Exit");
 
             //evaluates the correct options
             while (!bandera){
                 option = Integer.parseInt(scan.nextLine());
                 System.out.println();
-                if (option > 0 && option <= 2) 
+                if (option > 0 && option <= 6) 
                     bandera = true;
                 else{ 
                     System.out.println("(!) Choose a valid option"); 
@@ -121,9 +125,60 @@ public class Vista{
      * prints the warnings messages
      */
     public void warnings(){
-        System.out.println("\n----------------------------------");
+        System.out.println("\n------------------------------------");
         System.out.println("Be sure you have the following files");
         System.out.println("'dictionary.txt' and 'translate.txt'");
-        System.out.println("----------------------------------\n");
+        System.out.println("------------------------------------\n");
+    }
+
+    public String word(){
+        String word = " ";
+        try{
+            System.out.println("\nWrite the words to add");
+            System.out.println("-------------------------------------------");
+            System.out.println("Follow this format 'English,Spanish,French'");
+            System.out.println("-------------------------------------------\n");
+            word = scan.nextLine();
+            System.out.println();
+
+        } catch (InputMismatchException e){
+            String s = "(!) Conversion failed" + word + ": " + e.toString(); 
+            throw new InputMismatchException(s); 
+        }
+        return word;
+    }
+
+    public String delete(){
+        String del = " ";
+        try{
+            System.out.println("\nWrite the words you want to delete");
+            System.out.println("-------------------------------------------");
+            System.out.println("Follow this format 'English,Spanish,French'");
+            System.out.println("-------------------------------------------\n");
+            del = scan.nextLine();
+            System.out.println();
+
+        } catch (InputMismatchException e){
+            String s = "(!) Conversion failed" + del + ": " + e.toString(); 
+            throw new InputMismatchException(s); 
+        }
+        return del;
+    }
+
+    public String modify(){
+        String mod = " ";
+        try{
+            System.out.println("\nWrite the words you want to modify");
+            System.out.println("-------------------------------------------");
+            System.out.println("Follow this format 'English,Spanish,French'");
+            System.out.println("-------------------------------------------\n");
+            mod = scan.nextLine();
+            System.out.println();
+
+        } catch (InputMismatchException e){
+            String s = "(!) Conversion failed" + mod + ": " + e.toString(); 
+            throw new InputMismatchException(s); 
+        }
+        return mod;
     }
 }

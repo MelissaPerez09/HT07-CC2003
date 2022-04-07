@@ -12,7 +12,9 @@
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileNotFoundException; 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class Controlador{
     /**
@@ -26,7 +28,7 @@ public class Controlador{
         ArrayList<String>text = new ArrayList<>();
         ArrayList<ArrayList<String>>dictionary = new ArrayList<ArrayList<String>>();
         boolean flag = true;
-
+        
         vis.welcome();
         vis.warnings();
 
@@ -72,15 +74,55 @@ public class Controlador{
         }
 
         try {
-            //shows the dictionary in order
-            vis.message("\n----------------------------------");
-            vis.message("  Here's the dictionary in order");
-            vis.message("----------------------------------\n");
-            bst.inOrder();
-
             //starts the menu 
             int option = vis.menu();
-            while(option != 3){
+            while(option != 7){
+
+                //option of see the dictionary
+                if(option == 2){
+                    //shows the dictionary in order
+                    vis.message("\n----------------------------------");
+                    vis.message("  Here's the dictionary in order");
+                    vis.message("----------------------------------\n");
+                    bst.inOrder();
+                }
+
+
+                //option to add a word
+                if(option == 3){
+                    //allows to write in the dictionary
+                    try{
+                        File data = new File ("dictionary.txt");
+                        FileWriter write = new FileWriter(data, true);
+                        PrintWriter line = new PrintWriter(write);
+                        line.println(vis.word());
+                        line.close();
+                        write.close();
+                    } catch (Exception e) {
+                        vis.error();
+                    }
+                }
+
+                //option to delete a word
+                if(option == 4){
+                    //deletes a word from the dictionary
+                    dictionary.remove(vis.delete());
+                }
+
+                //option to modify a word
+                if(option == 5){
+                    //modifies a word from the dictionary
+                    try{
+                        File data = new File ("dictionary.txt");
+                        FileWriter write = new FileWriter(data, true);
+                        PrintWriter line = new PrintWriter(write);
+                        line.println(vis.modify());
+                        line.close();
+                        write.close();
+                    } catch (Exception e) {
+                        vis.error();
+                    }
+                }
 
                 //option of translator
                 if(option == 1){
@@ -142,9 +184,9 @@ public class Controlador{
                     }
 
                     //prints the translation text in the language
-                    vis.message(translation);
+                    vis.message(translation+ "\n");
                 }
-                
+
                 //'exit' option
                 else{
                     vis.bye();
@@ -152,7 +194,7 @@ public class Controlador{
                 }
             }
 
-            //catches the error if option in not an int
+            //catches the error if option is not an int
         } catch (Exception e) {
             vis.error();
         }
